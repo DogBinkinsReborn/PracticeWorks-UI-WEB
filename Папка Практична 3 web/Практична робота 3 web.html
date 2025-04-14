@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS Стилізація</title>
+<style>
+body { background-color: #101821; color: #333; margin: 0; padding: 20px; }
+
+h1 { font-family: Arial, sans-serif; color: #333; text-align: center; }
+h2 { text-align: center; }
+h3 { text-align: center; font-family: Courier, sans-serif; border: 2px dotted white; }
+h4 { color: #72cfed;  transition: color 0.3s ease; }
+h4:hover { color: yellow; }
+
+.container { max-width: 0 auto ; 2px ; }
+.classTest { 0 auto; 10px; }
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+<p> <h1 style="color: yellow;">Заголовок з вбудованим стилем h1</h1> </p>
+</div>
+
+<div class="classTest">
+<p> <h2 style="color: red;">Заголовок з вбудованим стилем h2</h2> </p>
+</div>
+
+<p> <h3 style="color: green;">Заголовок з вбудованим стилем h3</h3> </p>
+
+
+<!-- Інший контент -->
+
+<h4> <p> Параграф тексту 1 (h4 теги підсвічуються при наведенні) </p> </h4>
+<h4> <p> Параграф тексту 2 </p> </h4>
+
+<h4> Список: </h4>
+<h4> <ol> <li> Вода </li> <li> Кислота </li> <li> Лава </li> </ol> </h4>
+<br>
+<h4> Посилання: </h4>
+<a href="https://www.Youtube.com" style="color: gray;">Посилання на Youtube.com</a>
+<link rel="stylesheet" href="styles.css">
+
+<h5> Текст h5 якому присвоєний колір з styles.css </h5>
+
+<h4> Картинка: </h4>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ4FuNek9jde-mhfEBhRBGtiDzCtEbVquP0g&s" 
+alt="Картинка папуги" width=300 height=300 />
+
+</body>
+</html>
