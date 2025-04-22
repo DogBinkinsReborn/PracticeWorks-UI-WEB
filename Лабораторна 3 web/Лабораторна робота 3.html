@@ -1,0 +1,154 @@
+<!doctype html> <html lang="uk">
+
+<html>
+<head>
+<title> Flexbox Layout </title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox Layout</title>
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+
+.flex-list { display: flex; flex-wrap: wrap;
+width: 40%; gap: 15px; margin: 20px 0;}
+
+.flex-list2 { display: flex; flex-wrap: wrap;
+width: 40%; gap: 15px; margin: 20px 0;}
+
+.item { color: rgb(0,0,0); padding: 20px; background-color: rgb(100,100,240);
+border-radius: 8px; text-align: center; flex-basis: 22%; font-size: 16px; }
+
+.item2 { color: rgb(0,0,0); padding: 20px; background-color: rgb(100,240,100);
+border-radius: 8px; text-align: center; flex-basis: 22%; font-size: 16px; }
+
+.footer { display: flex; justify-content: space-between; align-items: flex-start;
+background-color: rgb(230,80,80); color: white; padding: 20px; flex-wrap: wrap; }
+
+.footer-column { flex-basis: 30%; color: rgb(0,0,0); }
+
+.footer-column h3 { margin-top: 0; color: rgb(0,0,0); }
+
+.footer-column ul { list-style-type: none; padding: 0; }
+
+.footer-column ul li { margin: 5px 0; color: rgb(0,0,0); }
+
+@media (max-width: 768px) {
+.footer { justify-content: center; }
+
+.footer-column { flex-basis: 100%; }
+}
+
+.sidebar { position: fixed; width: 120px; height: 80vh; position: fixed; right: 0; top: 70%; transform: translateY(-70%);          
+background-color: rgb(217, 220, 117); border=1 background-color: orange; border: 3px solid rgb(37, 20, 17); border-radius: 50px 0 0 50px;
+ color: white;padding: 20px; box-sizing: border-box; z-index: 1000;}
+
+.sidebar a { display: block; color: rgb(0,0,0); text-decoration: none; padding: 10px 15px; margin: 10px 0;              
+border-radius: 5px; transition: background-color 0.3s; text-align: center; }
+
+.sidebar a:hover { background-color: #34495e;}
+
+.content { margin-right: 250px; padding: 20px; }
+
+@media (max-width: 768px) {
+.sidebar { width: 120px; }
+
+.content { margin-right: 120px; } }
+
+@media (max-width: 480px) { .sidebar {  width: 80px; }
+
+.content { margin-right: 80px;} }
+
+@media (max-width: 320px) { .sidebar { display: none; }
+
+</style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+<p style="text-align: center; color: rgb(0,0,0);"> Сайдбар </p>
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">7</a>
+    <a href="#">8</a>
+  </div>
+
+<header class="navbar">
+<div class="logo" style="border-bottom=1; color: rgb(25,25,0);"> SpeedBox📦 </div>
+    <nav class="nav">
+      <ul class="nav-links">
+        <li><a href="#"><b>Головна</b></a></li>
+        <li><a href="#"><b>Про нас</b></a></li>
+        <li class="dropdown">
+          <a href="#"><b>Послуги</b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><b>Дизайн</b></a></li>
+            <li><a href="#"><b>Розробка</b></a></li>
+            <li><a href="#"><b>Підтримка</b></a></li>
+          </ul>
+        </li>
+        <li><a href="#"><b>Блог</b></a></li>
+        <li><a href="#"><b>Контакти</b></a></li>
+      </ul>
+    </nav>
+    <form class="search-form" role="search">
+      <input type="search" placeholder="Пошук" aria-label="Пошук">
+      <button type="submit">🔍</button>
+    </form>
+    <div class="burger" aria-label="Меню" tabindex="0" role="button">
+      ☰
+    </div>
+  </header>
+
+<br><br>
+
+<div style="font-size: 25px;"> Іграшки : </div>
+  <div class="flex-list">
+<div class="item">1</div> <div class="item">2</div> <div class="item">3</div> <div class="item">4</div>
+<div class="item">5</div> <div class="item">6</div> <div class="item">7</div> <div class="item">8</div>
+  </div>
+
+<br>
+<div style="font-size: 25px;"> Продукти : </div>
+  <div class="flex-list">
+<div class="item2">1</div> <div class="item2">2</div> <div class="item2">3</div> <div class="item2">4</div>
+<div class="item2">5</div> <div class="item2">6</div> <div class="item2">7</div> <div class="item2">8</div>
+  </div>
+
+</body>
+
+&nbsp <br>&nbsp <br>&nbsp <br>&nbsp <br>&nbsp <br>&nbsp <br>&nbsp <br>
+<footer class="footer">
+    <div class="footer-column">
+      <h3>Про нас</h3>
+      <p>ми компанія що продає речі в багатьох різних галулях.</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Швидкі посилання</h3>
+      <ul>
+        <li><a href="#">Головна</a></li>
+        <li><a href="#">Послуги</a></li>
+        <li><a href="#">Ціни</a></li>
+        <li><a href="#">Контакти</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Контакти:</h3>
+      <ul>
+        <li>Email: gmail@company.com</li>
+        <li>Телефон: +000 000 000 000</li>
+        <li>Адреса: Київ Україна</li>
+      </ul>
+    </div>
+  </footer>
+
+</html>
