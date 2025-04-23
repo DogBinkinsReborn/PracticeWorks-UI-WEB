@@ -1,0 +1,124 @@
+<!DOCTYPE html> <html lang="uk">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Валідація форми</title> 
+
+<!-- СТИЛІ -->
+
+<style>
+
+.FormLook {
+text-align: center;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- ТІЛО -->
+
+<div class="FormLook">
+  <h2>Введіть свої дані</h2>
+
+  <form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Ім’я:</label><br>
+    <input type="text" id="name" name="name" placeholder="Ваше ім’я"><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Ваша пошта (як a@b.com)"><br>
+
+    <label for="pnum">Номер телефону:</label><br>
+    <input type="number" id="pnum" name="pnum" placeholder="Ваш номер телефону"><br>
+
+    <label for="age">Вік:</label><br>
+    <input type="number" id="age" name="age" placeholder="від 18 до 100"><br>
+
+    <label for="password">Пароль:</label><br>
+    <input type="text" id="password" name="password" placeholder="Введіть пароль"><br>
+
+    <label for="passwordCheck">Підтвердити Пароль:</label><br>
+    <input type="text" id="passwordCheck" name="passwordCheck" placeholder="Підтвердіть пароль"><br>
+<br>
+
+Погодьтеся на умови та правила сайту :
+<input type="checkbox" id="terms" name="terms">
+<br> <br>
+    <button type="submit">Надіслати</button>
+  </form>
+</div>
+
+  <div id="error" style="color: red; margin-top: 10px; text-align: center;"></div>
+  <div id="success" style="color: green; margin-top: 10px; text-align: center;"></div>
+
+<!-- КОД -->
+<script>
+
+    function validateForm() {
+
+      document.getElementById('error').innerText = '';
+      document.getElementById('success').innerText = '';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const psw = document.getElementById('password').value.trim();
+      const pswc = document.getElementById('passwordCheck').value.trim();
+      const phoneNum = document.getElementById('pnum').value.trim();
+      const hasNumber = /\d/.test(psw);      
+      const hasUppercase = /[A-Z]/.test(psw);
+      const isOnlyNumbers = /^\d+$/.test(phoneNum);
+      const isChecked = document.getElementById("terms").checked;
+
+      if (name === '') {
+        document.getElementById('error').innerText = 'Будь ласка, введіть ім’я.';
+        return false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('error').innerText = 'Введіть коректну електронну адресу.';
+        return false;
+      }
+
+      if (!isOnlyNumbers) {
+        document.getElementById('error').innerText = 'Введіть номер телефону правильно (Тільки цифри).';
+        return false;
+      }
+
+
+      if (age === '' || isNaN(age) || age < 18 || age > 100) {
+        document.getElementById('error').innerText = 'Введіть коректний вік (18–100).';
+        return false;
+      }
+
+     if (psw.length < 8) {
+      document.getElementById('error').innerText = 'Пароль меньше 8 символів.';
+      return false;
+      }
+
+     if (!hasNumber) {
+      document.getElementById('error').innerText = 'Пароль має містити хочаби одну цифру.';
+      return false;
+      }
+
+     if (psw !== pswc) {
+      document.getElementById('error').innerText = 'Паролі не співпадають.';
+      return false;
+      }
+
+     if (!hasUppercase) {
+      document.getElementById('error').innerText = 'Пароль має містити хочаби одну велику літеру.';
+      return false;
+      }
+
+      if (!isChecked) {
+      document.getElementById('error').innerText = 'Погодьтеся на умови сайту.';
+      return false;
+      }
+
+      document.getElementById('success').innerText = 'Форма успішно надіслана!';
+      return false; 
+    }
+
+</script>
+</body>
+</html>
