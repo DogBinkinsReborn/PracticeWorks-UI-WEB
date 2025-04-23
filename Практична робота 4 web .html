@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Інтерактивні елементи</title>
+
+<!-- СТИЛІ -->
+<style>
+
+.gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+            float: left;
+      
+    }
+
+    .gallery img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    .modal2 {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal2 img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      
+    
+
+
+
+#scrollTopBtn {
+      display: none; 
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      font-size: 18px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #0056b3;
+    }
+
+</style>
+
+</head>
+
+<!-- ТІЛО -->
+<body>
+   
+  <div style="font-size: 25px;">Модальне вікно:</div>
+  <button onclick="openModal()">Відкрити</button>
+  <div id="myModal">
+    <div>
+      <p>модальне вікно</p>
+      <button onclick="closeModal()">Закрити</button>
+    </div>
+  </div>
+
+
+
+
+  <div style="font-size: 25px;">Залиште ваш відгук якщо у вас є побажання:</div>
+  <div id="responseMessage" style="display:none; color: green; margin-top: 10px;">
+    Дякуємо за ваш відгук!
+  </div>
+  <form id="feedbackForm" onsubmit="handleSubmit(event)">
+    <textarea name="feedback" id="feedback" rows="5" placeholder="Напишіть свій відгук тут" required></textarea><br>
+    <button type="submit">Надіслати</button>
+  </form>
+
+
+
+  <div style="font-size: 25px;">Галерея зображень:</div>
+  <div class="gallery">
+    <img src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Poodle.jpg?quality=60" alt="1">
+    <img src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Maltese.jpg?quality=60" alt="2">
+    <img src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Shih-Tzu.jpg?quality=60" alt="3">
+    <img src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Yorkshire-Terrier.jpg?quality=60" alt="4">
+    <img src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Pomeranian.jpg?quality=60" alt="5">
+  </div>
+  <div id="modal2" class="modal2">
+    <img id="modalImage" src="" alt="Large Image">
+  </div>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br>
+<div style="font-size: 25px;">Випадаюче меню:</div>
+  <button onclick="toggleMenu()">Меню:</button>
+  <div id="dropdownMenu" style="display: none; border: 1px solid #ccc; padding: 10px; width: 150px; background-color: #f9f9f9;">
+    <a href="#">Пункт 1</a><br>
+    <a href="#">Пункт 2</a><br>
+    <a href="#">Пункт 3</a>
+  </div>
+
+<div style="font-size: 25px;">Прокрутіть вниз:</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div style="font-size: 25px;">Нажміть на кнопку:</div>
+<button id="scrollTopBtn" onclick="scrollToTop()">Вгору:</button>
+
+<!-- КОД -->
+<script>
+
+const modal = document.getElementById('myModal');
+    modal.style.display = 'none'; 
+
+    function openModal() {
+      modal.style.position = 'fixed';
+      modal.style.top = 0;
+      modal.style.left = 0;
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+
+      const content = modal.querySelector('div');
+      content.style.backgroundColor = '#fff';
+      content.style.padding = '20px';
+      content.style.borderRadius = '8px';
+      content.style.textAlign = 'center';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+
+
+
+function handleSubmit(event) {
+      event.preventDefault();  
+
+      // Отримуємо значення відгуку
+      const feedback = document.getElementById('feedback').value;
+
+      if (feedback) {
+        document.getElementById('responseMessage').style.display = 'block';
+
+        document.getElementById('feedback').value = '';
+      }
+    }
+
+
+
+const images = document.querySelectorAll('.gallery img');
+    const modal2 = document.getElementById('modal2');
+    const modalImage = document.getElementById('modalImage');
+
+    images.forEach(image => {
+      image.addEventListener('click', function() {
+        modal2.style.display = 'flex';
+        modalImage.src = this.src;
+      });
+    });
+
+
+    function closeModal2() {
+      modal2.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal2) {
+        closeModal2();
+      }
+    };
+
+
+
+
+
+
+function toggleMenu() {
+      const menu = document.getElementById('dropdownMenu');
+      if (menu.style.display === 'none') {
+        menu.style.display = 'block';
+      } else {
+        menu.style.display = 'none';
+      }
+    }
+
+
+
+
+
+
+const scrollBtn = document.getElementById('scrollTopBtn');
+
+    window.onscroll = function () {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollBtn.style.display = 'block';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+
+</script>
+
+
+</body>
+</html>
