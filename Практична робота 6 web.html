@@ -1,0 +1,113 @@
+<!DOCTYPE html> <html lang="uk">
+<head> <meta charset="UTF-8"> <title>API Data</title>
+
+<!-- СТИЛІ -->
+
+<style>
+    .loader { display: none; font-weight: bold; }
+    .error { color: red; }
+    .user { border: 5px solid rgb(0,0,0); padding: 10px; margin: 5px 0; }
+    .pagination { margin-top: 20px; }
+    .pagination button { margin: 0 5px; }
+
+.alignStuff {
+text-align: center;
+}
+  </style>
+
+</head>
+
+<!-- ТІЛО -->
+
+<body class="alignStuff">
+  <h1>Список користувачів</h1>
+
+  <input type="text" id="search" placeholder="Пошук по імені" value=""/>
+  <div class="loader" id="loader">Завантаження</div>
+  <div class="error" id="error"></div>
+  <div id="user-list"></div>
+
+  <div class="pagination">
+    <button onclick="changePage(-1)">Назад</button>
+    <span id="page-number">1</span>
+    <button onclick="changePage(1)">Вперед</button>
+  </div>
+
+<!-- КОД -->
+
+  <script>
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    const upp = 6;
+    let users = [];
+    let filteredUsers = [];
+    let currentPage = 1;
+
+    const loader = document.getElementById('loader');
+    const errorDiv = document.getElementById('error');
+    const userList = document.getElementById('user-list');
+    const searchInput = document.getElementById('search');
+    const sthing = document.getElementById('search').value;
+    const pageNumber = document.getElementById('page-number');
+
+    async function fetchUsers() {
+      loader.style.display = 'block';
+      errorDiv.textContent = '';
+
+      try {
+        const cached = localStorage.getItem('users');
+        if (cached) {
+          users = JSON.parse(cached);
+        } else {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Не вдалося отримати дані');
+          users = await response.json();
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        filteredUsers = [...users];
+        renderUsers();
+      } catch (error) {
+        errorDiv.textContent = error.message;
+      } finally {
+        loader.style.display = 'none';
+      }
+    }
+
+    function renderUsers() {
+      userList.innerHTML = '';
+      const start = (currentPage - 1) * upp;
+      const end = start + upp;
+      const pageUsers = filteredUsers.slice(start, end);
+
+      if (pageUsers.length === 0) {
+        userList.innerHTML = '<p>Нічого не знайдено</p>';
+        return;
+      }
+
+      pageUsers.forEach(user => {
+        const div = document.createElement('div');
+        div.className = 'user';
+        div.innerHTML = `${user.name} , Email: ${user.email} , Місто: ${user.address.city}`;
+        userList.appendChild(div);
+      });
+
+      pageNumber.textContent = currentPage;
+    }
+
+    function changePage(direction) {
+      const totalPages = Math.ceil(filteredUsers.length / upp);
+      currentPage = Math.min(Math.max(currentPage + direction, 1), totalPages);
+      renderUsers();
+    }
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      filteredUsers = users.filter(user => user.name.toLowerCase().includes(query));
+      currentPage = 1;
+      renderUsers();
+    });
+
+    fetchUsers();
+  </script>
+</body>
+</html>
