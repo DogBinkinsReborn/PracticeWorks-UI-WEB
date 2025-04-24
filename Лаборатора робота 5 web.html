@@ -1,0 +1,109 @@
+<!DOCTYPE html> <html lang="uk">
+<head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Слайдер зображень</title>
+  <style>
+
+.slider{ position: relative; width: 100%; margin: auto; overflow: hidden;
+}
+.slider img{ width: 100%; display: none;
+}
+img.displaySlide{ display: block; animation-name: fade; animation-duration: 0.5s;
+}
+.slider button{ position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem;
+padding: 10px 15px; background-color: hsla(0, 0%, 0%, 0.5); color: white; border: none; cursor: pointer;
+}
+.prev{
+    left: 0;
+}
+.next{
+    right: 0;
+}
+@keyframes fade {
+    from {opacity: .5}
+    to {opacity: 1}
+}
+#fixedButton {
+position: fixed; left: 50%; top: 80%; transform: translateX(-50%); padding: 12px 24px;
+background-color: #007bff; color: white; border: none; border-radius: 5px;
+cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 2;
+}
+#counter{
+position: fixed; left: 50%; top: 85%; transform: translateX(-50%); padding: 12px 24px;
+z-index: 2; background-color: rgb(220,220,220);
+}
+
+
+  </style>
+</head>
+<body>
+
+<div style="backgroundColor = red;"><button id="fixedButton" onclick="handleClick()">Автопрокутка</button></div>
+<div id="counter"> <label id="dynamicLabel">0</label> </div>
+
+    <div class="slider">
+        <div class="slides">
+            <img class="slide" src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Maltese.jpg?quality=60" alt="Image #1">
+            <img class="slide" src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Yorkshire-Terrier.jpg?quality=60" alt="Image #2">
+            <img class="slide" src="https://money.com/wp-content/uploads/2024/03/Best-Small-Dog-Breeds-Pomeranian.jpg?quality=60" alt="Image #3">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094</button>
+        <button class="next" onclick="nextSlide()">&#10095</button>
+    </div>
+
+<script>
+
+const slides = document.querySelectorAll(".slides img");
+let slideIndex = 0;
+let intervalId = null;
+let b5 = false;
+
+document.addEventListener("DOMContentLoaded", initializeSlider);
+
+function initializeSlider(){
+    if(slides.length > 0){
+        slides[slideIndex].classList.add("displaySlide");
+    }
+}
+
+function showSlide(index){
+    if(index >= slides.length){
+        slideIndex = 0;
+    }
+    else if(index < 0){
+        slideIndex = slides.length - 1;
+    }
+document.getElementById("dynamicLabel").textContent = slideIndex;
+
+    slides.forEach(slide => {
+        slide.classList.remove("displaySlide");
+    });
+    slides[slideIndex].classList.add("displaySlide");
+}
+
+function prevSlide(){
+    clearInterval(intervalId);
+    slideIndex--;
+    showSlide(slideIndex);
+}
+
+function nextSlide(){
+    slideIndex++;
+    showSlide(slideIndex);
+}
+function handleClick() {
+const button = document.getElementById("fixedButton");
+  if (!b5) {
+    b5 = true;
+    intervalId = setInterval(nextSlide, 2000); 
+   button.style.backgroundColor = "green";
+  } else {
+    b5 = false;
+    clearInterval(intervalId);
+    intervalId = null;
+    button.style.backgroundColor = "red";
+  }
+}
+
+</script>
+
+</body>
+</html>
