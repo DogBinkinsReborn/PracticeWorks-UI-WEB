@@ -1,0 +1,84 @@
+<!DOCTYPE html> <html lang="uk">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Меню</title>
+  
+<!-- СТИЛІ -->
+
+<style>
+    nav, ul { padding: 0; margin: 0; list-style: none; background: #333; }
+    a { display: block; padding: 1em; color: #fff; text-decoration: none; }
+    a:hover, a.active { background: #444; }
+    li ul { display: none; background: background: #444; }
+    li.open > ul { display: block; }
+    .burger { display: none; font-size: 2em; padding: .5em; background: #333; color: white; border: none; }
+    @media(max-width:768px) {
+    nav { display: none; flex-direction: column; }
+    nav.open { display: flex; }
+    .burger { display: block; }
+    }
+  </style>
+</head>
+
+<!-- ТІЛО -->
+
+<body>
+
+<button class="burger">&#9776;</button>
+<nav id="menu"></nav>
+
+<!-- КОД -->
+
+<script>
+  const data = [
+    { title: "Секція 1", url: "#home" },
+    { title: "Секція 2 & 3,4 (другий підрівень)", url: "#about", children: [
+      { title: "Секція 3", url: "#team" },
+      { title: "Секція 4 & 5 (третій підрівень)", url: "#history", children: [
+        { title: "Секція 5", url: "#foundation" },
+        { title: "Секція 6", url: "#growth" }
+      ]}
+    ]},
+    { title: "Секція 7", url: "#services" },
+    { title: "Секція 8", url: "#blog" },
+    { title: "Секція 9", url: "#contacts" }
+  ];
+
+  const menu = document.getElementById("menu");
+  const burger = document.querySelector(".burger");
+  burger.onclick = () => menu.classList.toggle("open");
+
+  const build = (items) => {
+    const ul = document.createElement("ul");
+    items.forEach(({ title, url, children }) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.textContent = title; a.href = url; li.append(a);
+      a.onclick = (e) => {
+        document.querySelectorAll("a").forEach(el => el.classList.remove("active"));
+        a.classList.add("active");
+        localStorage.setItem("menu-active", url);
+        if (children) { e.preventDefault(); li.classList.toggle("open"); }
+      };
+      a.onkeydown = e => (e.key === "Enter") && a.click();
+      if (children) li.append(build(children));
+      ul.append(li);
+    });
+    return ul;
+  };
+
+  menu.append(build(data));
+  const saved = localStorage.getItem("menu-active");
+  if (saved) {
+    const active = document.querySelector(`a[href="${saved}"]`);
+    if (active) {
+      active.classList.add("active");
+      let el = active.parentElement;
+      while (el && el.tagName === "LI") {
+        el.classList.add("open");
+        el = el.parentElement.closest("li");
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
