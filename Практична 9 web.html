@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кешування та оптимізація</title>
+
+  <link rel="preload" as="image" href="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg">
+  <link rel="preload" as="image" href="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg">
+  <link rel="preload" as="image" href="https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg">
+</head>
+<body>
+  <form id="textForm">
+    Текст який зберігається при натисканні кнопки: <br>
+    <input type="text" name="TextSave" id="TextSave">
+    <br>
+    <button type="submit">Зберегти</button>
+  </form>
+
+  <br>
+  Галерея зображень: <br>
+  <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" width="10%" height="10%">
+  <img src="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg" width="10%" height="10%">
+  <img src="https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg" width="10%" height="10%">
+
+  <br><br>
+  Динамічний контент:
+  <button onclick="changeColor()">Кнопка для перемикання між кольором заднього фону</button>
+
+  <br><br>
+  Налаштування користувача:
+  <form>
+    <input type="checkbox" id="saveColorCheckbox"> Зберігати колір заднього фона при виході з сайту та завантажувати його на вході
+  </form>
+
+<!-- Все більш стиснуто для реалізації мінімізації js та css яку було сказано зробити в практичній -->
+<script>
+let thing = false;
+ window.onload = function () { const savedText = localStorage.getItem('TextSave'); if (savedText) { document.getElementById('TextSave').value = savedText; }
+
+const savedColor = localStorage.getItem('bgColor'); const saveColorEnabled = localStorage.getItem('saveColor') === 'true'; 
+document.getElementById('saveColorCheckbox').checked = saveColorEnabled;
+
+if (saveColorEnabled && savedColor) { document.body.style.backgroundColor = savedColor; thing = savedColor !== "rgb(255, 255, 255)"; } };
+document.getElementById('textForm').addEventListener('submit', function (e) { e.preventDefault(); const textValue = document.getElementById('TextSave').value;
+localStorage.setItem('TextSave', textValue); });
+
+function changeColor() { if (thing) { document.body.style.backgroundColor = "rgb(255, 255, 255)"; } else { document.body.style.backgroundColor = "rgb(150, 255, 150)"; }
+thing = !thing;
+
+if (document.getElementById('saveColorCheckbox').checked) { localStorage.setItem('bgColor', document.body.style.backgroundColor); } }
+
+document.getElementById('saveColorCheckbox').addEventListener('change', function () { localStorage.setItem('saveColor', this.checked);
+if (!this.checked) { localStorage.removeItem('bgColor'); }
+
+    });
+  </script>
+</body>
+</html>
