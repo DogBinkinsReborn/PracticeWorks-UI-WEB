@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head> 
+<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Оптимізація зображень</title>
+
+<style>
+
+body {
+background-color: rgb(200,250,500);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2> Вектор Зображення/Іконка: </h2>
+<img src="FoxImage.svg" width=8% height=5%>
+
+<br>
+<h2> JPEG Зображення: </h2>
+<picture>
+  <source srcset="SunImage.jpg" type="image/jpg">
+  <img src="SunImage.webp" type="image/webp"> 
+</picture>
+
+<br>
+<h2> PNG Зображення: </h2>
+<picture>
+  <source srcset="SunImage.png" type="image/png">
+  <source srcset="SunImage.webp" type="image/webp">
+  <img src="SunImage.jpg" loading="lazy">
+</picture>
+
+<br>
+<h2> webP Зображення: </h2>
+<picture>
+<source srcset="SunImage.webp" type="image/webp"
+sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw,1920px">
+  <img src="SunImage.webp"> 
+</picture>
+
+
+</body>
+</html>
