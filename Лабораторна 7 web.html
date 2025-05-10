@@ -1,0 +1,71 @@
+<!DOCTYPE html> <html lang="uk">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Адаптивна типографіка</title>
+<style>
+
+:root {
+--base-font-size: 16px;
+--scale-ratio: 1.25;
+--line-height: 1.6;
+}
+
+body {
+font-family: system-ui, sans-serif;
+font-size: var(--base-font-size);
+line-height: var(--line-height);
+max-width: 70ch;
+margin: 0 auto;
+padding: 1rem;
+background-color: rgb(27,20,17);
+color: rgb(245, 207, 103);
+}
+
+h1 {
+font-size: calc(var(--base-font-size) * var(--scale-ratio) * var(--scale-ratio));
+line-height: 1.2;
+}
+
+@media (min-width: 1201px) { :root { --base-font-size: 18px; } }
+
+@media (min-width: 768px) and (max-width: 1200px) { :root { --base-font-size: 22px; } }
+
+@media (max-width: 767px) { :root { --base-font-size: 24px; } }
+
+}
+</style>
+</head>
+<body>
+<div style="text-align: center;"><h1>Як приготувати млинці:</h1></div>
+<h3>Потрібні інгрідієнти:</h3>
+<ol>
+<li>100 г <b>звичайного</b> борошна.</li> <li>2 <b>великих</b> яйця.</li> <li>300 мл молока.</li> <li>1 <b>столова</b> ложка соняшникової або рослинної олії.</li>
+</ol>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Олія</th>
+      <th>Насиченість:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Соняшникова</td>
+      <td>10-12%</td>
+    </tr>
+    <tr>
+      <td>Рослинна</td>
+      <td>10-15%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Етапи приготування: [частина 1]</h3>
+<h4><mark>Якщо ви ще дитина то попросіть допомоги у дорослого щоб не поранитися</mark></h4>
+<p>Розбийте 2 яцйя в миску та добавте 300 мл молока, після цього повільно додавайте борошно та неперервно перемішуйте. 
+Додайте після цього 1 столову ложку соняшникової або рослинної олії.</p>
+<h3>Етапи приготування: [частина 2]</h3>
+<p>Якщо ви все зробили правильно то можна переходити до смаження млинців, спочатку розігрійте сковорідку до потрібної температури, після чого повільно виливайте суміш на
+сковорідку, обсмаєуйте 1-2 хвилини з кожного боку перед тим як переходити до нового.</p>
+<p>Вітаю вас, ви (мабуть) правильно приготували млинці! Як говорила одна людина - <b>Не можна добре думати, добре любити, добре спати, якщо не пообідав добре.</b> </p>
+</body>
+</html>
