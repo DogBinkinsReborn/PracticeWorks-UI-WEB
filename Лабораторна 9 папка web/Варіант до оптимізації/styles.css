@@ -1,0 +1,22 @@
+body{
+background-color: rgb(30,30,50);
+color: white;
+}
+
+.responsive-img {
+  width: 20%;
+  height: auto;
+}
+
+@media (max-width: 1200px) {
+  .responsive-img {
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-img {
+    width: 45%;
+  }
+}
+
